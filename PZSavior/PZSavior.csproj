@@ -8,6 +8,7 @@
     <PackageIcon>pz-icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/vosiz/zomboid-savior</RepositoryUrl>
+    <ApplicationIcon>Resources\ico.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
