@@ -1,15 +1,18 @@
 # zomboid-savior
 A simple savegame manager for Project Zomboid
 
-Savior is a simple Windows-based tool to manage savegames of [Project Zomboid](https://projectzomboid.com) by [The Indie Stone](https://pzwiki.net/w/index.php?title=The_Indie_Stone).
+(PZ)Savior is a simple Windows-based tool to manage savegames of [Project Zomboid](https://projectzomboid.com) by [The Indie Stone](https://pzwiki.net/w/index.php?title=The_Indie_Stone).
 
-Primary goal is to save/load a game anytime (sort of) - I admit: It is cheating and definetly against how/what game is meant to be played by devs. But... if you are no fan of permadeath fetish... My desire is to play game without frustration I always lost everything... As a player I love to start over again... if I descides or want to.
+Primary goal is to save/load a game anytime (sort of) - I admit: It is cheating and definetly against how/what game is meant to be played by devs. But if you are no fan of permadeath fetish... 
+My desire is to play the game (free) without frustration I always lost everything - as a player I love to start over again; if I descided or want to.
+
+It was done for private purpose.
 
 > [!IMPORTANT]
-> App is still in development, current version is optimized for Single player only - save-all-like scenario. Expect more soon.
+> App is still in development, current version is optimized for Single player only - save-all-like scenario. Expect more soon, check TODO-list.
 
 ## Usage
-Just download it and extract. Run executable.
+Just download [it](https://github.com/vosiz/zomboid-savior/releases) and extract. Run executable.
 
 No need to alter binaries. It is a standalone tool.
 
@@ -42,3 +45,14 @@ Made in WinForms by pure "nostalgia". Feel free to remake it.
 - [ ] Version support
 - [ ] Save buttons and options
 - [ ] Last save image (to be not confused)
+- [ ] Let it Alpha-tested
+- [ ] \(Optional) Do not go crazy or burnout
+
+## Thanks to
+### Contributors
+- in progress :)
+
+### Others
+- [Dauphong](https://thepiratebay.org/search.php?q=user:dauphong) - for obvious reasons (if you are familiar :-X)
+
+
