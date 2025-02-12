@@ -41,3 +41,4 @@ Made in WinForms by pure "nostalgia". Feel free to remake it.
 - [ ] Multisave management
 - [ ] Version support
 - [ ] Save buttons and options
+- [ ] Last save image (to be not confused)
