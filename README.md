@@ -47,7 +47,7 @@ Made in WinForms by pure "nostalgia". Feel free to remake it.
 - [ ] Last save image (to be not confused)
 - [ ] Let it Alpha-tested
 - [ ] \(Optional) Do not go crazy or burnout
-- [ ] Speedup saving
+- [x] Speedup saving
 
 ## Bug-hunter
 - [x] https://github.com/vosiz/zomboid-savior/issues/1
