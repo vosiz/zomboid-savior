@@ -47,6 +47,10 @@ Made in WinForms by pure "nostalgia". Feel free to remake it.
 - [ ] Last save image (to be not confused)
 - [ ] Let it Alpha-tested
 - [ ] \(Optional) Do not go crazy or burnout
+- [ ] Speedup saving
+
+## Bug-hunter
+- [ ] #1
 
 ## Thanks to
 ### Contributors
