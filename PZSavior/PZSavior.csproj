@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
+    <TargetFramework>net4.8-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <PackageIcon>pz-icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -39,5 +38,28 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="App.config" />
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="bin\Release\*.pdb">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
+    <Content Update="bin\Release\*.config">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="PrePublishScript" BeforeTargets="Publish">
+    <Exec Command="$(SolutionDir)..\tools\mdconvert\mdconvert.exe -input $(SolutionDir)CHANGELOG.md -output $(ProjectDir)bin\$(Configuration)\$(TargetFramework)\CHANGELOG.txt -type txt" />
+  </Target>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>None</DebugType>
+  </PropertyGroup>
 
 </Project>

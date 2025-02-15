@@ -58,7 +58,7 @@ namespace PZSavior.UI
 
         public void UpdateStatus(int progress, string task = "")
         {
-            progress = Math.Clamp(progress, PbarProgress.Minimum, PbarProgress.Maximum);
+            //progress = Math.Clamp(progress, PbarProgress.Minimum, PbarProgress.Maximum);
 
             if (InvokeRequired)
             {
