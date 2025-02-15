@@ -50,7 +50,7 @@ Made in WinForms by pure "nostalgia". Feel free to remake it.
 - [ ] Speedup saving
 
 ## Bug-hunter
-- [ ] https://github.com/vosiz/zomboid-savior/issues/1
+- [x] https://github.com/vosiz/zomboid-savior/issues/1
 
 ## Thanks to
 ### Contributors
