@@ -12,7 +12,6 @@ namespace PZSavior.Helpers
 
         public static async Task CopyDirectoryAsync(string src, string dest, IProgress<int> progress)
         {
-
             Directory.CreateDirectory(dest);
 
             string[] files = Directory.GetFiles(src);
@@ -28,27 +27,40 @@ namespace PZSavior.Helpers
             foreach (var file in files)
             {
                 string destFile = Path.Combine(dest, Path.GetFileName(file));
-                File.Copy(file, destFile, overwrite: true);
 
-                // Report progress for files
-                filesCopied++;
-                int progressPercentage = (int)((float)(filesCopied + subdirectoriesCopied) / (totalFiles + totalSubdirectories) * 100);
-                progress.Report(progressPercentage);
+                // Check if the file exists and is newer in the source directory
+                if (!File.Exists(destFile) || File.GetLastWriteTime(file) > File.GetLastWriteTime(destFile))
+                {
+                    File.Copy(file, destFile, overwrite: true);
 
-                await Task.Delay(10); // Optional: Add a small delay to simulate async work
+                    // Report progress for files
+                    filesCopied++;
+                    int progressPercentage = (int)((float)(filesCopied + subdirectoriesCopied) / (totalFiles + totalSubdirectories) * 100);
+                    progress.Report(progressPercentage);
+                }
+
+                await Task.Delay(1); // To ensure smoothness
             }
 
-            // Recursively copy all subdirectories
-            foreach (var subdirectory in subdirectories)
+            // Copy all subdirectories
+            foreach (var subdir in subdirectories)
             {
-                string destSubdirectory = Path.Combine(dest, Path.GetFileName(subdirectory));
-                await CopyDirectoryAsync(subdirectory, destSubdirectory, progress); // Recursive call
+                string destSubdir = Path.Combine(dest, Path.GetFileName(subdir));
 
-                // Report progress for subdirectories
+                // Recursively copy subdirectories if they don't exist
+                if (!Directory.Exists(destSubdir))
+                {
+                    Directory.CreateDirectory(destSubdir);
+                    await CopyDirectoryAsync(subdir, destSubdir, progress); // Recursive call
+                }
+
                 subdirectoriesCopied++;
-                int progressPercentage = (int)((float)(filesCopied + subdirectoriesCopied) / (totalFiles + totalSubdirectories) * 100);
-                progress.Report(progressPercentage);
+                int subdirProgress = (int)((float)(filesCopied + subdirectoriesCopied) / (totalFiles + totalSubdirectories) * 100);
+                progress.Report(subdirProgress);
+
+                await Task.Delay(1); // To ensure smoothness
             }
         }
+
     }
 }
