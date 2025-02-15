@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PZSavior.UI
 {
-    public partial class WaitModal : Form
+    public partial class WaitModal : Base.NonFocusableForm
     {
         private int Jobs;
         private int Done;
