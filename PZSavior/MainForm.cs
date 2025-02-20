@@ -9,8 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PZSavior.Helpers;
-using PZSavior.KeyHook;
 using PZSavior.FileManagement;
+using Vosiz.Utils.Extends;
+using Vosiz.Helpers;
+using PZSavior.KeyHook;
 
 namespace PZSavior
 {
@@ -36,7 +38,7 @@ namespace PZSavior
             ControlHelper.FillWithEnums<Enums.CompatibilityVersion>(CboxVersion);
             CboxVersion.SelectedIndex = 0;
 
-            KeyHook = new GlobalKeyHook(SaveInvoked);
+            KeyHook = new GlobalKeyHook(SaveInvoked, new Keys[] { Keys.Control }, new Keys[] { Keys.S });
             //UiHelper = new UiHelper();
             Sman = new SaveManager();
         }
@@ -94,6 +96,44 @@ namespace PZSavior
             TboxStorage.Text = Config.Paths.DEFAULT_STORAGE_PATH_DIR;
             ShowInfo("Default path for storage filled");
         }
+
+        private async void BtnBackupSaves_Click(object sender, EventArgs e)
+        {
+            BtnLoadSaves.Enabled = false;
+
+            try
+            {
+                ShowInfo("Start loading...");
+                var archvmachine = Sman.PrepareToArchive(
+                    PathHelper.UserProfile(TboxSave.Text),
+                    PathHelper.Combine(TboxStorage.Text, 
+                        string.Format(
+                            "backup_{0}.zip", 
+                            DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")
+                        )
+                    )
+                );
+
+                var wm = new UI.WaitModal();
+                wm.Init("Loading files", "Creating back up...", archvmachine.FilesCount);
+                wm.ShowOnTop();
+
+                await Task.Run(() => BackupSaves(wm, archvmachine));
+
+                wm.CloseDialog();
+                ShowInfo("... backed-up at " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            finally
+            {
+                BtnLoadSaves.Enabled = true;
+            }
+
+        }
+
         #endregion
 
         #region Tasks - private
@@ -123,6 +163,19 @@ namespace PZSavior
 
         }
 
+        private async Task BackupSaves(UI.WaitModal wm, ArchiveTask archive) 
+        {
+
+            var progress = new Progress<int>(percent =>
+            {
+                Console.WriteLine($"Progress: {percent}%");
+                wm.UpdateStatus(percent);
+            });
+
+            await archive.Execute(progress);
+            await Task.Delay(1000);
+        }
+
         private async Task CopySaves(UI.WaitModal wm, CopyTask copy)
         {
 
@@ -137,6 +190,7 @@ namespace PZSavior
             await Task.Delay(1000);
             KeyHook.Enabled = true;
         }
+
         #endregion
 
         #region Privates
@@ -145,8 +199,9 @@ namespace PZSavior
 
             LblInfo.Text = string.Format(format, pars);
         }
-        #endregion
 
+
+        #endregion
 
     }
 }

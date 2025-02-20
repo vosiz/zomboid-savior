@@ -10,13 +10,14 @@ namespace PZSavior.FileManagement
     public class SaveManager
     {
 
-        CopyTask CurrentCopy;
-
         public CopyTask PrepareToCopy(string origin, string destination) {
 
-            CurrentCopy = new CopyTask(origin, destination);
+            return new CopyTask(origin, destination);
+        }
 
-            return CurrentCopy;
+        public ArchiveTask PrepareToArchive(string origin, string destination) {
+
+            return new ArchiveTask(origin, destination);
         }
 
         

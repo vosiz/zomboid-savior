@@ -8,6 +8,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/vosiz/zomboid-savior</RepositoryUrl>
     <ApplicationIcon>Resources\ico.ico</ApplicationIcon>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,6 +43,11 @@
   <ItemGroup>
     <None Remove="App.config" />
     <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SharpZipLib" Version="1.4.2" />
+    <PackageReference Include="Vosiz.UtilsLib" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
